@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS transactions CASCADE;
 CREATE TABLE transactions (
+    id INT PRIMARY KEY,
     account VARCHAR(32) NOT NULL,
     date DATE NOT NULL,
     amount DECIMAL(10, 2) NOT NULL,
