@@ -1,4 +1,4 @@
-name: agenticAiWorkshop-postgres-service
+name: ${COMPOSE_PROJECT_NAME}
 services:
   postgres:
     build:
@@ -14,7 +14,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - postgres-network
+      - default
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
@@ -26,5 +26,6 @@ volumes:
   postgres_data:
 
 networks:
-  postgres-network:
-    driver: bridge
+  default:
+    name: workshop-shared-network
+    external: true
