@@ -1,16 +1,16 @@
-name: ${COMPOSE_PROJECT_NAME}
+name: ${COMPOSE_PROJECT_NAME:-agentic-ai-workshop}
 services:
   postgres:
     build:
       context: .
       dockerfile: Dockerfile.postgres
-    container_name: ${POSTGRES_HOST}
+    container_name: ${POSTGRES_HOST:-postgres}
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-workshop123}
+      POSTGRES_DB: ${POSTGRES_DB:-transactionsdb}
     ports:
-      - "${POSTGRES_PORT}:5432"
+      - "${POSTGRES_PORT:-5432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:

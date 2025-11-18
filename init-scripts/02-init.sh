@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CSV_URL="https://huggingface.co/api/resolve-cache/datasets/souljaboi6801/Expense_Mang/bbd3779836426e89b8c0175a66a702295b3c1ee1/transactions.csv?%2Fdatasets%2Fsouljaboi6801%2FExpense_Mang%2Fresolve%2Fmain%2Ftransactions.csv=&etag=%22610b4f34a0e3541f7f7dfe2f95375c86b31c0a02%22"
+CSV_URL=${HF_DATASET_URL:-"https://huggingface.co/api/resolve-cache/datasets/souljaboi6801/Expense_Mang/bbd3779836426e89b8c0175a66a702295b3c1ee1/transactions.csv?%2Fdatasets%2Fsouljaboi6801%2FExpense_Mang%2Fresolve%2Fmain%2Ftransactions.csv=&etag=%22610b4f34a0e3541f7f7dfe2f95375c86b31c0a02%22"}
 TEMP_FILE="/tmp/dataset.csv"
 CLEAN_FILE="/tmp/dataset_clean.csv"
 POSTGRES_USER="${POSTGRES_USER:-postgres}"
