@@ -11,24 +11,26 @@ def clean_csv(input_file, output_file):
                 reader = csv.reader(infile)
                 writer = csv.writer(outfile)
                 
-                for row in reader:
+                date_index = 2
+                column_max_length = 7
+                
+                for (idx, row) in enumerate(reader):
                     cleaned_row = [field.strip() for field in row]
-                    
+                    cleaned_row.insert(0, idx)
                     while cleaned_row and cleaned_row[-1] == '':
                         cleaned_row.pop()
                         
-                    if len(cleaned_row) >= 2:
-                        try:
-                            parsed_date = datetime.strptime(cleaned_row[1], "%d/%m/%Y")
-                            cleaned_row[1] = parsed_date.strftime("%Y-%m-%d")
-                        except ValueError:
-                            print(f"Warning: Invalid date format '{cleaned_row[1]}'", file=sys.stderr)
+                    try:
+                        parsed_date = datetime.strptime(cleaned_row[date_index], "%d/%m/%Y")
+                        cleaned_row[date_index] = parsed_date.strftime("%Y-%m-%d")
+                    except ValueError:
+                        print(f"Warning: Invalid date format '{cleaned_row[date_index]}'", file=sys.stderr)
 
                     
-                    if len(cleaned_row) == 6:
+                    if len(cleaned_row) == column_max_length:
                         writer.writerow(cleaned_row)
-                    elif len(cleaned_row) > 6:
-                        writer.writerow(cleaned_row[:6])
+                    elif len(cleaned_row) > column_max_length:
+                        writer.writerow(cleaned_row[:column_max_length])
                     else:
                         print(f"Warning: Skipping row with {len(cleaned_row)} fields", file=sys.stderr)
         
